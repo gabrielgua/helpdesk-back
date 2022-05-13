@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class TecnicoService {
 
@@ -16,5 +18,9 @@ public class TecnicoService {
     @Transactional(readOnly = true)
     public Tecnico buscarPorId(Long id) {
         return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id));
+    }
+
+    public List<Tecnico> buscarTodos() {
+        return repository.findAll();
     }
 }
