@@ -1,6 +1,7 @@
 package com.gabriel.helpdesk.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabriel.helpdesk.enums.Perfil;
 import lombok.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class Tecnico extends Pessoa{
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
 
