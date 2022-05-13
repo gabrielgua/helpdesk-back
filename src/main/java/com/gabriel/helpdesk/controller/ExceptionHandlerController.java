@@ -1,5 +1,6 @@
 package com.gabriel.helpdesk.controller;
 
+import com.gabriel.helpdesk.exception.DataIntegrityViolationException;
 import com.gabriel.helpdesk.exception.ObjectNotFoundException;
 import com.gabriel.helpdesk.exception.StandardError;
 import org.springframework.http.HttpStatus;
@@ -23,5 +24,18 @@ public class ExceptionHandlerController {
                 );
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException ex, HttpServletRequest request) {
+        StandardError error = new StandardError(
+                System.currentTimeMillis(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Data Violation",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
