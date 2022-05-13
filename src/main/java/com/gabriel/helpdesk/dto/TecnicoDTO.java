@@ -30,6 +30,7 @@ public class TecnicoDTO implements Serializable {
 
     public TecnicoDTO() {
         super();
+        addPerfil(Perfil.CLIENTE);
     }
 
     public TecnicoDTO(Tecnico t) {
@@ -41,6 +42,7 @@ public class TecnicoDTO implements Serializable {
         this.senha = t.getSenha();
         this.perfis = t.getPerfis().stream().map(p -> p.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = t.getDataCriacao();
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Set<Perfil> getPerfis() {
