@@ -6,6 +6,7 @@ import com.gabriel.helpdesk.enums.Perfil;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -19,9 +20,16 @@ public class TecnicoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected Long id;
+    @NotNull(message = "Nome é requerido!")
     protected String nome;
+
+    @NotNull(message = "CPF é requerido!")
     protected String cpf;
+
+    @NotNull(message = "Email é requerido!")
     protected String email;
+
+    @NotNull(message = "Senha é requerida!")
     protected String senha;
     protected Set<Integer> perfis = new HashSet<>();
 
