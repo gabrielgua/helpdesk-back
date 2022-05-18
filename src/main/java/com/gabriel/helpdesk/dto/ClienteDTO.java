@@ -1,7 +1,7 @@
 package com.gabriel.helpdesk.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gabriel.helpdesk.domain.Tecnico;
+import com.gabriel.helpdesk.domain.Cliente;
 import com.gabriel.helpdesk.enums.Perfil;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class TecnicoDTO implements Serializable {
+public class ClienteDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,12 +37,12 @@ public class TecnicoDTO implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
 
-    public TecnicoDTO() {
+    public ClienteDTO() {
         super();
         addPerfil(Perfil.CLIENTE);
     }
 
-    public TecnicoDTO(Tecnico t) {
+    public ClienteDTO(Cliente t) {
         super();
         this.id = t.getId();
         this.nome = t.getNome();
