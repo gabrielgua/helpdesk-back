@@ -40,5 +40,11 @@ public class TecnicoController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TecnicoDTO> editarTecnico(@PathVariable("id") Long id,@Valid @RequestBody TecnicoDTO tecnicoDTO) {
+        Tecnico tecnico = service.editar(id, tecnicoDTO);
+        return ResponseEntity.ok().body(new TecnicoDTO(tecnico));
+    }
+
 }
 

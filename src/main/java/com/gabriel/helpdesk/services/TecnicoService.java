@@ -57,4 +57,13 @@ public class TecnicoService {
 
 
     }
+
+    @Transactional(readOnly = false)
+    public Tecnico editar(Long id, TecnicoDTO tecnicoDTO) {
+        tecnicoDTO.setId(id);
+        Tecnico tecnico = buscarPorId(id);
+        validaPorCpfEEmail(tecnicoDTO);
+        tecnico = new Tecnico(tecnicoDTO);
+        return repository.save(tecnico);
+    }
 }
