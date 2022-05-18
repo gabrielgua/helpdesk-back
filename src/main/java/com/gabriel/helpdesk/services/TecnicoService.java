@@ -66,4 +66,13 @@ public class TecnicoService {
         tecnico = new Tecnico(tecnicoDTO);
         return repository.save(tecnico);
     }
+
+    @Transactional(readOnly = false)
+    public void deletar(Long id) {
+        Tecnico tecnico = buscarPorId(id);
+        if (tecnico.getChamados().size() > 0) {
+            throw new DataIntegrityViolationException("Técnico possui chamados atrelados!");
+        }
+        repository.deleteById(id);
+    }
 }
