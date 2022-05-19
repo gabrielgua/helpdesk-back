@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,7 @@ public class ChamadoService {
         return repository.save(novoChamado(dto));
     }
 
+    @Transactional(readOnly = false)
     private Chamado novoChamado(ChamadoDTO dto) {
         Tecnico tecnico = tecnicoService.buscarPorId(dto.getTecnico());
         Cliente cliente = clienteService.buscarPorId(dto.getCliente());
@@ -51,6 +53,10 @@ public class ChamadoService {
         Chamado chamado = new Chamado();
         if (dto.getId() != null) {
             chamado.setId(dto.getId());
+        }
+
+        if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
+            chamado.setDataConclusao(LocalDate.now());
         }
 
         chamado.setTecnico(tecnico);
@@ -64,30 +70,11 @@ public class ChamadoService {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Transactional(readOnly = false)
+    public Chamado editar(Long id, ChamadoDTO dto) {
+        dto.setId(id);
+        Chamado oldChamado = buscarPorId(id);
+        oldChamado = novoChamado(dto);
+        return repository.save(oldChamado);
+    }
 }

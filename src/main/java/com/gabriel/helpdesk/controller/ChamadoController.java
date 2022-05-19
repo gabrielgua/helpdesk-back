@@ -40,5 +40,9 @@ public class ChamadoController {
         return ResponseEntity.created(uri).build();
     }
 
-
+    @PutMapping("/{id}")
+    public ResponseEntity<ChamadoDTO> editarChamado(@PathVariable("id") Long id, @Valid @RequestBody ChamadoDTO dto) {
+        Chamado chamado = service.editar(id, dto);
+        return ResponseEntity.ok().body(new ChamadoDTO(chamado));
+    }
 }
