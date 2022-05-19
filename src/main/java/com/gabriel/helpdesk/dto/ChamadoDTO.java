@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -22,11 +23,23 @@ public class ChamadoDTO implements Serializable {
     private LocalDate dataAbertura = LocalDate.now();
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataConclusao;
+
+    @NotNull(message = "Prioridade é requerida!")
     private Integer prioridade;
+
+    @NotNull(message = "Status é requerido!")
     private Integer status;
+
+    @NotNull(message = "Observações é requerida!")
     private String observacoes;
+
+    @NotNull(message = "Título é requerido!")
     private String titulo;
+
+    @NotNull(message = "Técnico é requerido!")
     private Long tecnico;
+
+    @NotNull(message = "Cliente é requerido!")
     private Long cliente;
     private String nomeTecnico;
     private String nomeCliente;

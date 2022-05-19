@@ -5,11 +5,11 @@ import com.gabriel.helpdesk.dto.ChamadoDTO;
 import com.gabriel.helpdesk.services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +31,13 @@ public class ChamadoController {
         List<Chamado> chamados = service.buscarTodos();
         List<ChamadoDTO> dtos = chamados.stream().map(c -> new ChamadoDTO(c)).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtos);
+    }
+
+    @PostMapping
+    public ResponseEntity<ChamadoDTO> salvarChamado(@Valid @RequestBody ChamadoDTO dto) {
+        Chamado chamado = service.salvar(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(chamado.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 
