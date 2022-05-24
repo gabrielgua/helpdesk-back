@@ -8,6 +8,7 @@ import com.gabriel.helpdesk.exception.ObjectNotFoundException;
 import com.gabriel.helpdesk.repositories.PessoaRepository;
 import com.gabriel.helpdesk.repositories.TecnicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,9 @@ public class TecnicoService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     @Transactional(readOnly = true)
     public Tecnico buscarPorId(Long id) {
         return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id));
@@ -36,6 +40,7 @@ public class TecnicoService {
     @Transactional(readOnly = false)
     public Tecnico salvar(TecnicoDTO tecnicoDTO) {
         tecnicoDTO.setId(null);
+        tecnicoDTO.setSenha(encoder.encode(tecnicoDTO.getSenha()));
         validaPorCpfEEmail(tecnicoDTO);
         Tecnico tecnico = new Tecnico(tecnicoDTO);
         return repository.save(tecnico);

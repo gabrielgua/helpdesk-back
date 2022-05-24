@@ -10,6 +10,7 @@ import com.gabriel.helpdesk.repositories.ChamadoRepository;
 import com.gabriel.helpdesk.repositories.ClienteRepository;
 import com.gabriel.helpdesk.repositories.TecnicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -26,19 +27,22 @@ public class DataBaseService {
     @Autowired
     private TecnicoRepository tecnicoRepository;
 
-    public void dbInit() {
-        Tecnico tec1 = new Tecnico(null, "Gabriel Guaitanele", "12292554941", "gabriel@mail.com", "123123");
-        tec1.addPerfil(Perfil.ADMIN);
-        Tecnico tec2 = new Tecnico(null, "Richard Stallman", "90334707056", "stallman@mail.com", "123123");
-        Tecnico tec3 = new Tecnico(null, "Claude Elwood Shannon", "27106847054", "shannon@mail.com", "123123");
-        Tecnico tec4 = new Tecnico(null, "Tim Berners-Lee", "16272012039", "lee@mail.com", "123123");
-        Tecnico tec5 = new Tecnico(null, "Linus Torvalds", "77855617027", "linus@mail.com", "123123");
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
-        Cliente cli1 = new Cliente(null, "Albert Einstein", "11166189074", "einstein@mail.com", "123123");
-        Cliente cli2 = new Cliente(null, "Marie Curie", "32242914006", "curie@mail.com", "123123");
-        Cliente cli3 = new Cliente(null, "Charles Darwin", "79204383062", "darwin@mail.com", "123123");
-        Cliente cli4 = new Cliente(null, "Stephen Hawking", "17740968030", "hawking@mail.com", "123123");
-        Cliente cli5 = new Cliente(null, "Max Planck", "08139930083", "planck@mail.com", "123123");
+    public void dbInit() {
+        Tecnico tec1 = new Tecnico(null, "Gabriel Guaitanele", "12292554941", "gabriel@mail.com", encoder.encode("123123"));
+        tec1.addPerfil(Perfil.ADMIN);
+        Tecnico tec2 = new Tecnico(null, "Richard Stallman", "90334707056", "stallman@mail.com", encoder.encode("123123"));
+        Tecnico tec3 = new Tecnico(null, "Claude Elwood Shannon", "27106847054", "shannon@mail.com", encoder.encode("123123"));
+        Tecnico tec4 = new Tecnico(null, "Tim Berners-Lee", "16272012039", "lee@mail.com", encoder.encode("123123"));
+        Tecnico tec5 = new Tecnico(null, "Linus Torvalds", "77855617027", "linus@mail.com", encoder.encode("123123"));
+
+        Cliente cli1 = new Cliente(null, "Albert Einstein", "11166189074", "einstein@mail.com", encoder.encode("123123"));
+        Cliente cli2 = new Cliente(null, "Marie Curie", "32242914006", "curie@mail.com", encoder.encode("123123"));
+        Cliente cli3 = new Cliente(null, "Charles Darwin", "79204383062", "darwin@mail.com", encoder.encode("123123"));
+        Cliente cli4 = new Cliente(null, "Stephen Hawking", "17740968030", "hawking@mail.com", encoder.encode("123123"));
+        Cliente cli5 = new Cliente(null, "Max Planck", "08139930083", "planck@mail.com", encoder.encode("123123"));
 
         Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 1", "Teste chamado 1", tec1, cli1);
         Chamado c2 = new Chamado(null, Prioridade.ALTA, Status.ABERTO, "Chamado 2", "Teste chamado 2", tec1, cli2);

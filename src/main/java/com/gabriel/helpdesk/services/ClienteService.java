@@ -8,6 +8,7 @@ import com.gabriel.helpdesk.exception.ObjectNotFoundException;
 import com.gabriel.helpdesk.repositories.PessoaRepository;
 import com.gabriel.helpdesk.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,9 @@ public class ClienteService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     @Transactional(readOnly = true)
     public Cliente buscarPorId(Long id) {
         return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id));
@@ -36,6 +40,7 @@ public class ClienteService {
     @Transactional(readOnly = false)
     public Cliente salvar(ClienteDTO ClienteDTO) {
         ClienteDTO.setId(null);
+        ClienteDTO.setSenha(encoder.encode(ClienteDTO.getSenha()));
         validaPorCpfEEmail(ClienteDTO);
         Cliente cliente = new Cliente(ClienteDTO);
         return repository.save(cliente);
