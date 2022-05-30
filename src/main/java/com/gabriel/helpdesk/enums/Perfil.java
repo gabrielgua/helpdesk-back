@@ -1,22 +1,22 @@
 package com.gabriel.helpdesk.enums;
 
 public enum Perfil {
-    ADMIN(0, "ADMINISTRADOR"), CLIENTE(1, "CLIENTE"), TECNICO(2, "TECNICO");
+    ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
 
     private Integer codigo;
-    private String descicao;
+    private String descricao;
 
-    Perfil(int codigo, String descicao) {
+    Perfil(int codigo, String descricao) {
         this.codigo = codigo;
-        this.descicao = descicao;
+        this.descricao = descricao;
     }
 
     public Integer getCodigo() {
         return codigo;
     }
 
-    public String getDescicao() {
-        return descicao;
+    public String getDescricao() {
+        return descricao;
     }
 
     public static Perfil toEnum(Integer cod) {

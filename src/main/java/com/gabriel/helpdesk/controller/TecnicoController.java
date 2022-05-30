@@ -5,6 +5,7 @@ import com.gabriel.helpdesk.dto.TecnicoDTO;
 import com.gabriel.helpdesk.services.TecnicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,6 +34,7 @@ public class TecnicoController {
         return ResponseEntity.ok().body(dtos);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TecnicoDTO> salvarTecnico(@Valid @RequestBody TecnicoDTO tecnicoDTO) {
         Tecnico tecnico = service.salvar(tecnicoDTO);
@@ -40,12 +42,14 @@ public class TecnicoController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<TecnicoDTO> editarTecnico(@PathVariable("id") Long id,@Valid @RequestBody TecnicoDTO tecnicoDTO) {
         Tecnico tecnico = service.editar(id, tecnicoDTO);
         return ResponseEntity.ok().body(new TecnicoDTO(tecnico));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<TecnicoDTO> deletarTecnico(@PathVariable("id") Long id) {
         service.deletar(id);
