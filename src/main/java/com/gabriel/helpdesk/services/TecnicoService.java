@@ -67,6 +67,11 @@ public class TecnicoService {
     public Tecnico editar(Long id, TecnicoDTO tecnicoDTO) {
         tecnicoDTO.setId(id);
         Tecnico tecnico = buscarPorId(id);
+
+        if (!tecnicoDTO.getSenha().equals(tecnico.getSenha())) {
+            tecnicoDTO.setSenha(encoder.encode(tecnicoDTO.getSenha()));
+        }
+
         validaPorCpfEEmail(tecnicoDTO);
         tecnico = new Tecnico(tecnicoDTO);
         return repository.save(tecnico);

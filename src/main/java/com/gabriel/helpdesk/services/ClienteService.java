@@ -60,11 +60,16 @@ public class ClienteService {
     }
 
     @Transactional(readOnly = false)
-    public Cliente editar(Long id, ClienteDTO ClienteDTO) {
-        ClienteDTO.setId(id);
+    public Cliente editar(Long id, ClienteDTO clienteDTO) {
+        clienteDTO.setId(id);
         Cliente cliente = buscarPorId(id);
-        validaPorCpfEEmail(ClienteDTO);
-        cliente = new Cliente(ClienteDTO);
+
+        if (!clienteDTO.getSenha().equals(cliente.getSenha())) {
+            clienteDTO.setSenha(encoder.encode(clienteDTO.getSenha()));
+        }
+
+        validaPorCpfEEmail(clienteDTO);
+        cliente = new Cliente(clienteDTO);
         return repository.save(cliente);
     }
 
