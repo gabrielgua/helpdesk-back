@@ -5,3 +5,7 @@
 ## Links 
   - Diretório da api: https://gb-helpdesk-prod.herokuapp.com
   - Documentação[swagger]
+  
+## Login teste
+  - admin@mail.com
+  - 123123
