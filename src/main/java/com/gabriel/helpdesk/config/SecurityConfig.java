@@ -24,7 +24,19 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};
+    private static final String[] PUBLIC_MATCHERS = {
+            "/h2-console/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/tecnicos",
+            "/tecnicos/*",
+            "/clientes",
+            "/clientes/*",
+            "/chamados",
+            "/chamados/*"
+    };
 
     @Autowired
     private Environment env;
