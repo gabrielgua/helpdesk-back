@@ -4,7 +4,7 @@
   
 ## Links 
   - [Demo do Projeto](https://helpdesk-front-beta.vercel.app/)
-  - [Swagger](https://gb-helpdesk-prod.herokuapp.com/swagger-ui/index.html)]
+  - [Swagger](https://gb-helpdesk-prod.herokuapp.com/swagger-ui/index.html)
   - Diretório da api: https://gb-helpdesk-prod.herokuapp.com
  
   
