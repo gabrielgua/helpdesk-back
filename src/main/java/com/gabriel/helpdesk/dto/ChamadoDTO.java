@@ -2,7 +2,6 @@ package com.gabriel.helpdesk.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gabriel.helpdesk.domain.Chamado;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
