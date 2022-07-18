@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public class ChamadoDTO implements Serializable {
 
     private Long id;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private ZonedDateTime dataAbertura = ZonedDateTime.now();
+    private ZonedDateTime dataAbertura = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private ZonedDateTime dataConclusao;
 

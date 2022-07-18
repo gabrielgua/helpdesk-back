@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class ClienteDTO implements Serializable {
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    protected ZonedDateTime dataCriacao = ZonedDateTime.now();
+    protected ZonedDateTime dataCriacao = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
     public ClienteDTO() {
         super();

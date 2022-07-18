@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,7 @@ public class ChamadoService {
         }
 
         if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
-            chamado.setDataConclusao(ZonedDateTime.now());
+            chamado.setDataConclusao(ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")));
         } else {
             chamado.setDataConclusao(null);
         }
