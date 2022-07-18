@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,7 +63,7 @@ public class ChamadoService {
         }
 
         if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
-            chamado.setDataConclusao(LocalDateTime.now());
+            chamado.setDataConclusao(ZonedDateTime.now());
         } else {
             chamado.setDataConclusao(null);
         }

@@ -7,8 +7,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import java.time.ZonedDateTime;
 
 @Entity
 @Getter
@@ -23,10 +23,10 @@ public class Chamado implements Serializable {
     private Long id;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime dataAbertura = LocalDateTime.now();
+    private ZonedDateTime dataAbertura = ZonedDateTime.now();
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime dataConclusao;
+    private ZonedDateTime dataConclusao;
     private Prioridade prioridade;
     private Status status;
     private String observacoes;
@@ -44,7 +44,7 @@ public class Chamado implements Serializable {
         super();
     }
 
-    public Chamado(Long id, Prioridade prioridade, Status status, String observacoes, String titulo, Tecnico tecnico, Cliente cliente) {
+    public Chamado(Long id, Prioridade prioridade, Status status, String observacoes, String titulo, Tecnico tecnico, Cliente cliente, ZonedDateTime dataConclusao) {
         super();
         this.id = id;
         this.prioridade = prioridade;
@@ -53,5 +53,6 @@ public class Chamado implements Serializable {
         this.titulo = titulo;
         this.tecnico = tecnico;
         this.cliente = cliente;
+        this.dataConclusao = dataConclusao;
     }
 }

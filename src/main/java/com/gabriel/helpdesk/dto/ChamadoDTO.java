@@ -8,8 +8,8 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import java.time.ZonedDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -20,9 +20,9 @@ public class ChamadoDTO implements Serializable {
 
     private Long id;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime dataAbertura = LocalDateTime.now();
+    private ZonedDateTime dataAbertura = ZonedDateTime.now();
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime dataConclusao;
+    private ZonedDateTime dataConclusao;
 
     @NotNull(message = "Prioridade é requerida!")
     private Integer prioridade;

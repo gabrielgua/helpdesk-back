@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public abstract class Pessoa implements Serializable {
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDate dataCriacao = LocalDate.now();
+    protected ZonedDateTime dataCriacao = ZonedDateTime.now();
 
     public Pessoa() {
         super();
@@ -100,11 +101,11 @@ public abstract class Pessoa implements Serializable {
         this.senha = senha;
     }
 
-    public LocalDate getDataCriacao() {
+    public ZonedDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(ZonedDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 }
