@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,12 +52,19 @@ public class ChamadoService {
         Cliente cliente = clienteService.buscarPorId(dto.getCliente());
 
         Chamado chamado = new Chamado();
+
         if (dto.getId() != null) {
             chamado.setId(dto.getId());
         }
 
+        if (dto.getDataAbertura() != null) {
+            chamado.setDataAbertura(dto.getDataAbertura());
+        }
+
         if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
-            chamado.setDataConclusao(LocalDate.now());
+            chamado.setDataConclusao(LocalDateTime.now());
+        } else {
+            chamado.setDataConclusao(null);
         }
 
         chamado.setTecnico(tecnico);

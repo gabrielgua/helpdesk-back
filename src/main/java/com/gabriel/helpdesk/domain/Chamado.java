@@ -8,6 +8,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -21,11 +22,11 @@ public class Chamado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataAbertura = LocalDate.now();
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private LocalDateTime dataAbertura = LocalDateTime.now();
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataConclusao;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private LocalDateTime dataConclusao;
     private Prioridade prioridade;
     private Status status;
     private String observacoes;

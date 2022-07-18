@@ -33,7 +33,7 @@ public class DataBaseService {
     public void dbInit() {
         Tecnico tec1 = new Tecnico(null, "Admin", "67094830025", "admin@mail.com", encoder.encode("123123"));
         tec1.addPerfil(Perfil.ADMIN);
-        Tecnico tec2 = new Tecnico(null, "Gabriel Guaitanele Niszczak", "90334707056", "stallman@mail.com", encoder.encode("123123"));
+        Tecnico tec2 = new Tecnico(null, "Gabriel Guaitanele", "90334707056", "stallman@mail.com", encoder.encode("123123"));
         Tecnico tec3 = new Tecnico(null, "Claude Elwood Shannon", "27106847054", "shannon@mail.com", encoder.encode("123123"));
         Tecnico tec4 = new Tecnico(null, "Tim Berners-Lee", "16272012039", "lee@mail.com", encoder.encode("123123"));
         Tecnico tec5 = new Tecnico(null, "Linus Torvalds", "77855617027", "linus@mail.com", encoder.encode("123123"));
