@@ -64,7 +64,7 @@ public class ChamadoService {
         }
 
         if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
-            chamado.setDataConclusao(ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")));
+            chamado.setDataConclusao(LocalDateTime.now());
         } else {
             chamado.setDataConclusao(null);
         }
